@@ -189,10 +189,10 @@ function! s:act.replace_pair(buns, stuff, undojoin, modified) dict abort "{{{
   let opt     = self.opt
 
   if s:lib.is_valid_4pos(target) && s:lib.is_ahead(target.head2, target.tail1)
-    set virtualedit=
+    setlocal virtualedit=
     let next_head = s:lib.get_right_pos(target.tail1)
     let next_tail = s:lib.get_left_pos(target.head2)
-    set virtualedit=onemore
+    setlocal virtualedit=onemore
 
     let reg = ['"', getreg('"'), getregtype('"')]
     let deletion = ['', '']

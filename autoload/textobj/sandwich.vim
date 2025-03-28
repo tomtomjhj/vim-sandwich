@@ -55,8 +55,8 @@ function! textobj#sandwich#select() abort  "{{{
   let textobj = g:textobj#sandwich#object
   call textobj.initialize()
   let stimeoutlen = max([0, s:get_textobj_option('stimeoutlen', 500)])
-  let [virtualedit, whichwrap]   = [&virtualedit, &whichwrap]
-  let [&virtualedit, &whichwrap] = ['onemore', 'h,l']
+  let [virtualedit, whichwrap]   = [&l:virtualedit, &whichwrap]
+  let [&l:virtualedit, &whichwrap] = ['onemore', 'h,l']
   try
     let candidates = textobj.list(stimeoutlen)
     let elected = textobj.elect(candidates)
@@ -68,7 +68,7 @@ function! textobj#sandwich#select() abort  "{{{
     if !textobj.done
       call winrestview(view)
     endif
-    let [&virtualedit, &whichwrap] = [virtualedit, whichwrap]
+    let [&l:virtualedit, &whichwrap] = [virtualedit, whichwrap]
   endtry
 
   let g:textobj#sandwich#object = textobj " This is required in case that textobj-sandwich call textobj-sandwich itself in its recipe.

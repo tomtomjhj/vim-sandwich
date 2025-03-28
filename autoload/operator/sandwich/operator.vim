@@ -149,8 +149,8 @@ endfunction
 function! s:operator.split(region) dict abort  "{{{
   let reg  = ['"', getreg('"'), getregtype('"')]
   let view = winsaveview()
-  let virtualedit = &virtualedit
-  let &virtualedit = 'all'
+  let virtualedit = &l:virtualedit
+  let &l:virtualedit = 'all'
   try
     if self.blockwidth == 0
       " The case for blockwise motions in operator-pending mode
@@ -193,7 +193,7 @@ function! s:operator.split(region) dict abort  "{{{
   finally
     call call('setreg', reg)
     call winrestview(view)
-    let &virtualedit = virtualedit
+    let &l:virtualedit = virtualedit
   endtry
   return region_list
 endfunction
@@ -776,7 +776,7 @@ endfunction
 function! s:shift_options(kind, mode) abort "{{{
   """ save options
   let options = {}
-  let options.virtualedit = &virtualedit
+  let options.virtualedit = &l:virtualedit
   let options.whichwrap   = &whichwrap
   let options.cpoptions   = &cpoptions
   let options.formatoptions = &formatoptions
@@ -804,7 +804,7 @@ function! s:shift_options(kind, mode) abort "{{{
   endif
 
   """ shift options
-  set virtualedit=onemore
+  setlocal virtualedit=onemore
   set whichwrap=h,l
   set cpoptions-=l
   set cpoptions-=\
@@ -824,7 +824,7 @@ function! s:restore_options(kind, mode, options) abort "{{{
     let &t_ve = a:options.cursor
   endif
 
-  let &virtualedit = a:options.virtualedit
+  let &l:virtualedit = a:options.virtualedit
   let &whichwrap   = a:options.whichwrap
   let &cpoptions   = a:options.cpoptions
   let &l:formatoptions = a:options.formatoptions
